@@ -11,8 +11,7 @@ class Student(Base):
     __tablename__ = 'student'
     id = Column(Integer, primary_key=True)
     name =  Column(String(50))
-    section = relationship('Section', backref = 'section')
-
+    section = relationship('UploadSection', backref = 'upload_section')
 
     def __init__(self, id, name):
         self.id = id
