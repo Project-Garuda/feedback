@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, Blueprint, flash
+from flask import Flask, render_template, request, redirect, url_for, Blueprint, flash, session
 from sqlalchemy.orm import scoped_session, sessionmaker
 app = Flask(__name__, static_url_path='/static')
+app.secret_key = 'Helloworld'
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
@@ -17,13 +18,19 @@ def create_engine_models():
 from project.mod_student import models
 from project.mod_faculty import models
 create_engine_models()
+
 from project.mod_student import controllers
 from project.mod_student.controllers import mod_student
 app.register_blueprint(mod_student, url_prefix='/student')
+
+
+
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    if request.form:
+    if request.method == "POST":
         print('DataPassed through post')
+        session['user'] = request.form['login_username']
+        session['secret_key'] = request.form['secretkey']
         print(request.form)
         return redirect(url_for('.student.student_dashboard'))
     return render_template('index.html')
