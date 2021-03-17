@@ -7,6 +7,6 @@ mod_faculty = Blueprint('faculty', __name__)
 @mod_faculty.route("/", methods=['GET', 'POST'])
 def faculty_dashboard():
     if 'user' in session:
-        return render_template('faculty/faculty_dashboard.html')
+        return render_template('faculty_dashboard.html')
     else:
         return redirect(url_for('home'))
