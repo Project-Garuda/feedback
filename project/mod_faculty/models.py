@@ -13,9 +13,12 @@ class Faculty(Base):
     name =  Column(String(50))
     courses = relationship('UploadCourses', backref='faculty')
     feedback = relationship('Feedback', backref='faculty')
+    password = Column(String(255), nullable=False)
 
-    def __init__(self, name):
+    def __init__(self, id, name, password):
+        self.id = id
         self.name = name
+        self.password = password
 
 class Courses(Base):
     __tablename__ = 'courses'

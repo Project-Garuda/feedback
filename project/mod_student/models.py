@@ -12,10 +12,12 @@ class Student(Base):
     id = Column(Integer, primary_key=True)
     name =  Column(String(50))
     section = relationship('UploadSection', backref = 'upload_section')
+    password = Column(String(255), nullable=False)
 
-    def __init__(self, id, name):
+    def __init__(self, id, name, password):
         self.id = id
         self.name = name
+        self.password = password
 
 class Section(Base):
     """docstring for Section."""
