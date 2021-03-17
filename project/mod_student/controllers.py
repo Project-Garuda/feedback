@@ -7,7 +7,6 @@ mod_student = Blueprint('student', __name__)
 @mod_student.route("/", methods=['GET', 'POST'])
 def student_dashboard():
     if 'user' in session:
-        print(session['user'])
-        return "student_dashboard"
+        return render_template('student/student_dashboard.html')
     else:
-        return 'Please login'
+        return redirect(url_for('home'))
