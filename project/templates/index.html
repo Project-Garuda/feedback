@@ -38,12 +38,19 @@ if (self != top) { try { if (document.domain != top.document.domain) { throw "Cl
 <br>
 <tr><td align="right" width="30%">Password:</td>
 <td align="left" width="70%"><input type="password" name="secretkey" onfocus="alreadyFocused=true;" required/>
-<input type="hidden" name="js_autodetect_results" value="0" />
-<input type="hidden" name="just_logged_in" value="1" />
+
 </td>
 </tr>
 </table>
 </td>
+</tr>
+
+<tr><td align="right"><center>
+  <input type="radio" id="student" name="role" value="student" checked>
+  <label for="student">Student</label>
+  <input type="radio" id="faculty" name="role" value="faculty">
+  <label for="faculty">Faculty</label>
+</center></td>
 </tr>
 <tr><td align="left"><center><input id="more" type="submit" value="Login" />
 </center></td>
@@ -52,8 +59,8 @@ if (self != top) { try { if (document.domain != top.document.domain) { throw "Cl
 </center></td>
 </tr>
 </table>
-<p align="center" style="font-size: medium">Are you using a public computer?<br>Enter your password with the <a href="#" onclick="window.open('../plugins/vkeyboard/vkeyboard.php?passformname=secretkey', '', 'toolbar=no,width=450,height=250')">virtual keyboard</a></p><center><br /><input type='checkbox' value='1' name='stayInSSL' id='stayCheckbox'><label for='stayCheckbox'> Remain Secure After Login </label><br />  </center>
+
 </form>
 </body>
-<p style="text-align:center; color:red; font-size:20px" ><blink><STRONG>Do not reply to any mail asking for your WEBMAIL PASSWORD. These are all SPAM mails.</STRONG></blink></p>
+<p style="text-align:center; color:red; font-size:20px" ><blink><STRONG>Do not reply to any mail asking for your PASSWORD. These are all SPAM mails.</STRONG></blink></p>
 </html>
