@@ -27,8 +27,3 @@ def home():
         print(request.form)
         return redirect(url_for('.student.student_dashboard'))
     return render_template('index.html')
-
-@app.route("/check_post/",methods=['GET','POST'])
-def check_post():
-    print("Data passed through post")
-    return render_template('index.html')
