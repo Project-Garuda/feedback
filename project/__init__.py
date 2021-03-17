@@ -25,8 +25,8 @@ create_engine_models()
 
 from project.mod_student import controllers
 from project.mod_student.controllers import mod_student
+from project.mod_student.models import Student
 app.register_blueprint(mod_student, url_prefix='/student')
-
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -34,10 +34,11 @@ def home():
     if request.method == "POST":
         user_id = request.form['login_username']
         if request.form['role'] == 'student':
-            session['user'] = user_id
             student = Student.query.filter(Student.id == user_id).first()
-            hashed_password = bcrypt.generate_password_hash(request.form['secretkey']).decode('utf-8')
-            if student and bcrypt.check_password_hash(student.password, hashed_password):
+            print(student.password)
+            print(request.form['secretkey'])
+            print(bcrypt.check_password_hash(student.password, request.form['secretkey']))
+            if student and bcrypt.check_password_hash(student.password, request.form['secretkey']):
                 return redirect(url_for('.student.student_dashboard'))
             else:
                 return " Login unsuccessful"
