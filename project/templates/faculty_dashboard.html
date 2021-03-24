@@ -15,6 +15,11 @@
 
   <!-- Custom styles for this template -->
   <link href="{{ url_for('static',filename='css/simple-sidebar.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.min.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}"/>
+
+
 
 </head>
 
@@ -24,7 +29,7 @@
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Hello!</div>
+      <div class="sidebar-heading">Hello {{ faculty.name }}</div>
       <div class="list-group list-group-flush">
         <a href="#" class="list-group-item list-group-item-action bg-light">Analytics</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
@@ -67,9 +72,22 @@
       </nav>
 
       <div class="container-fluid">
-        <h1 class="mt-4">Simple Sidebar</h1>
-        <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
-        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p>
+        <div class="grid-x">
+       <table class="stack hover sortable" id="userTable">
+           <thead>
+               <tr>
+                   <th>Course ID</th>
+               </tr>
+           </thead>
+           <tbody>
+           {% for course in faculty.courses %}
+               <tr>
+                   <td>{{ course.course_id }}</td>
+               </tr>
+           {% endfor %}
+           </tbody>
+       </table>
+   </div>
       </div>
     </div>
     <!-- /#page-content-wrapper -->
@@ -78,8 +96,8 @@
   <!-- /#wrapper -->
 
   <!-- Bootstrap core JavaScript -->
-  <script src="static/vendor/jquery/jquery.min.js"></script>
-  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
   <!-- Menu Toggle Script -->
   <script>

@@ -29,7 +29,7 @@ td {
 <body text="#000000" bgcolor="#ffffff" link="#0000cc" vlink="#0000cc" alink="#0000cc" onLoad="squirrelmail_loginpage_onload();">
 
 <form action="{{ url_for('.home') }}" method="post" name="login_form"  >
-<table bgcolor="#ffffff" border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td align="center"><center><img src="static/images/iiitg.JPG" alt="Indian Institute of Information Technology Guwahati Logo" width="100" height="100" /><br />
+<table bgcolor="#ffffff" border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td align="center"><center><img src="{{ url_for('static',filename='images/iiitg.JPG') }}" alt="Indian Institute of Information Technology Guwahati Logo" width="100" height="100" /><br />
 <small><br />
   <br /></small>
 <table bgcolor="#ffffff" border="0" width="350"><tr><td bgcolor="#dcdcdc" align="center"><b>Faculty Feedback Management System</b>
