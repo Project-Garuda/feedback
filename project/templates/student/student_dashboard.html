@@ -1,10 +1,116 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <p>Student</p>
-  </body>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Simple Sidebar - Start Bootstrap Template</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href= "{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"/>
+
+  <!-- Custom styles for this template -->
+  <link href="{{ url_for('static',filename='css/simple-sidebar.css') }}" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.min.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}"/>
+
+  <style type="text/css">
+  /* avoid stupid IE6 bug with frames and scrollbars */
+  .grid-x {
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+}
+  td {
+      padding-top: .3em;
+      padding-bottom: .3em;
+  }
+  </style>
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading">Hello {{ student.name }}</div>
+      <div class="list-group list-group-flush">
+        <a href="{{ url_for('.logout') }}" class="list-group-item list-group-item-action bg-light">Log Out</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+
+      </nav>
+
+      <div class="container-fluid">
+
+        <div class="grid-x">
+       <table class="stack hover sortable" id="courseTable">
+           <thead>
+               <tr>
+                   <th>Course ID</th>
+                   <th>Course Name</th>
+                   <th>Faculty Name</th>
+                   <th>Feedback</th>
+               </tr>
+           </thead>
+           <tbody>
+           {% for course in upload_courses %}
+               <tr>
+                   <td>{{ course.course_id }}</td>
+                   <td>{{ course_names.query.filter(course.course_id == course_names.id).first().name}}</td>
+                    <td>{{ faculty.query.filter(course.faculty_id == faculty.id).first().name}}</td>
+                    {% if filled.query.filter(filled.student_id == student.id, filled.upload_courses_id == course.id).first() is none%}
+                    <td><a href="{{ url_for('.submit_feedback', id = course.id)}}">Submit Feedback</a></td>
+                    {% else %}
+                    <td style="color:green;">Already Submitted</td>
+                    {% endif %}
+               </tr>
+           {% endfor %}
+           </tbody>
+       </table>
+   </div>
+      </div>
+      <center>
+      {% with messages = get_flashed_messages() %}
+               {% if messages %}
+                      {% for message in messages %}
+                          <b><p style="color:green;">{{ message }}</p></b>
+                      {% endfor %}
+                {% endif %}
+      {% endwith %}
+      </center>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
 </html>

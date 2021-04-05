@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Faculty | Dashboard</title>
+  <title>Admin | Dashboard</title>
 
   <!-- Bootstrap core CSS -->
   <link href= "{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -43,11 +43,11 @@
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Hello {{ faculty.name }}</div>
+      <div class="sidebar-heading">Hello {{ admin.name }}</div>
       <div class="list-group list-group-flush">
-        <a href="{{ url_for('.faculty_dashboard') }}" class="list-group-item list-group-item-action bg-light">Home</a>
-        <a href="{{ url_for('.create_course') }}" class="list-group-item list-group-item-action bg-light">Create course</a>
-        <a href="{{ url_for('faculty.logout') }}" class="list-group-item list-group-item-action bg-light">Log Out</a>
+        <a href="{{ url_for('.admin_dashboard') }}" class="list-group-item list-group-item-action bg-light">Home</a>
+        <a href="{{ url_for('.admin_upload') }}" class="list-group-item list-group-item-action bg-light">Upload Data</a>
+        <a href="{{ url_for('.logout') }}" class="list-group-item list-group-item-action bg-light">Log Out</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -63,24 +63,30 @@
       <div class="container-fluid">
 
         <div class="grid-x">
+          {% if upload_courses|length >0 %}
        <table class="stack hover sortable" id="courseTable">
            <thead>
                <tr>
                    <th>Course ID</th>
                    <th>Course Name</th>
+                   <th>Faculty</th>
                    <th>Feedback</th>
                </tr>
            </thead>
            <tbody>
-           {% for course in faculty.courses %}
+           {% for course in upload_courses %}
                <tr>
-                   <td onclick="myFunction(event)" id="#more">{{ course.course_id }}</td>
+                   <td>{{ course.course_id }}</td>
                    <td>{{ course_names.query.filter(course.course_id == course_names.id).first().name}}</td>
+                   <td>{{ faculty.query.filter(course.faculty_id == faculty.id).first().name}}</td>
                    <td><a href="{{ url_for('.view_responses', id = course.id)}}">View Response</a></td>
                </tr>
            {% endfor %}
            </tbody>
        </table>
+       {% else %}
+       <center><p> No courses to display </p></center>
+       {% endif %}
    </div>
       </div>
       <center>

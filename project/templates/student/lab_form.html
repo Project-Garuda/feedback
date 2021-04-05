@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/vendor.css') }}"/>
+      <style type="text/css">
+      /* avoid stupid IE6 bug with frames and scrollbars */
+      .grid-x {
+      padding: 30px;
+    }
+      </style>
+  </head>
+  <body>
+    <form action=""
+      target="_self"
+      id="bootstrapForm"
+      class= "grid-x"
+      method="POST">
+    <fieldset>
+        <h2>{{ course_id }} - {{ course_name }} (Lab) - {{ faculty_name }} <br><small>Detailed comments are welcome.
+</small></h2>
+    </fieldset>
+
+    <fieldset>
+        <legend for="1062032157">About the lab</legend>
+        <div class="form-group">
+        </div>
+    </fieldset>
+
+    <!-- Field type: "linear" id: "496373246" -->
+    <fieldset>
+        <legend for="496373246">A detailed write-up on the lab component was provided.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p1" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p1" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p1" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p1" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p1" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1460703102" -->
+    <fieldset>
+        <legend for="1460703102">The lab assignments were useful and followed the lectures.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p2" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p2" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p2" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p2" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p2" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1809602327" -->
+    <fieldset>
+        <legend for="1809602327">The equipments were user friendly.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p3" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p3" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p3" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p3" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p3" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1368524353" -->
+    <fieldset>
+        <legend for="1368524353">The equipments were functioning properly.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p4" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p4" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p4" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p4" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p4" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1338862263" -->
+    <fieldset>
+        <legend for="1338862263">The lab session helped in clarifiying basic concepts taught in the lectures.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p5" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p5" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p5" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p5" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p5" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "section" id: "1928759629" -->
+    <fieldset>
+        <legend for="1928759629">About the lab tutor</legend>
+        <div class="form-group">
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1426950992" -->
+    <fieldset>
+        <legend for="1426950992">Overall, the Lab Tutor was excellent.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p6" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p6" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p6" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p6" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p6" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "715238538" -->
+    <fieldset>
+        <legend for="715238538">The Lab Tutor was well prepared for the class.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p7" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p7" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p7" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p7" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p7" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1793708049" -->
+    <fieldset>
+        <legend for="1793708049">The Lab Tutor’s instructions were clear and understandable.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p8" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p8" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p8" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p8" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p8" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1718529808" -->
+    <fieldset>
+        <legend for="1718529808">Evaluation of lab sessions were done regularly & academic advices were given.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p9" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p9" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p9" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p9" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p9" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "272847404" -->
+    <fieldset>
+        <legend for="272847404">The Lab Tutor helped in clarifiying technical concepts involved in the practical work.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p10" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p10" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p10" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p10" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p10" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "paragraph" id: "592303986" -->
+    <fieldset>
+        <legend for="592303986">Mention strong and weak points of the lab course / instructions. Any other detailed comments are welcome. Also mention suggestions, if any, to improve the lab course and its teaching methodology so that the lab course will be more useful and enjoyable. </legend>
+        <div class="form-group">
+            <textarea id="849562661" name="remark" class="form-control" ></textarea>
+        </div>
+    </fieldset>
+
+    <input type="hidden" name="fvv" value="1">
+    <input type="hidden" name="fbzx" value="5064360990907815707">
+    <!--
+        CAVEAT: In multipages (multisection) forms, *pageHistory* field tells to google what sections we've currently completed.
+        This usually starts as "0" for the first page, then "0,1" in the second page... up to "0,1,2..N" in n-th page.
+        Keep this in mind if you plan to change this code to recreate any sort of multipage-feature in your exported form.
+        We're setting this to the total number of pages in this form because we're sending all fields from all the section together.
+    -->
+    <input type="hidden" name="pageHistory" value="0,1">
+
+    <input class="btn btn-primary" type="submit" value="Submit">
+</form>
+  </body>
+</html>

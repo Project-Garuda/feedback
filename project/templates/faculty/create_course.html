@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Faculty | Dashboard</title>
+  <title>Simple Sidebar - Start Bootstrap Template</title>
 
   <!-- Bootstrap core CSS -->
   <link href= "{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -34,6 +34,7 @@
       padding-top: .3em;
       padding-bottom: .3em;
   }
+
   </style>
 </head>
 
@@ -46,7 +47,6 @@
       <div class="sidebar-heading">Hello {{ faculty.name }}</div>
       <div class="list-group list-group-flush">
         <a href="{{ url_for('.faculty_dashboard') }}" class="list-group-item list-group-item-action bg-light">Home</a>
-        <a href="{{ url_for('.create_course') }}" class="list-group-item list-group-item-action bg-light">Create course</a>
         <a href="{{ url_for('faculty.logout') }}" class="list-group-item list-group-item-action bg-light">Log Out</a>
       </div>
     </div>
@@ -63,31 +63,35 @@
       <div class="container-fluid">
 
         <div class="grid-x">
-       <table class="stack hover sortable" id="courseTable">
-           <thead>
-               <tr>
-                   <th>Course ID</th>
-                   <th>Course Name</th>
-                   <th>Feedback</th>
-               </tr>
-           </thead>
-           <tbody>
-           {% for course in faculty.courses %}
-               <tr>
-                   <td onclick="myFunction(event)" id="#more">{{ course.course_id }}</td>
-                   <td>{{ course_names.query.filter(course.course_id == course_names.id).first().name}}</td>
-                   <td><a href="{{ url_for('.view_responses', id = course.id)}}">View Response</a></td>
-               </tr>
-           {% endfor %}
-           </tbody>
-       </table>
+          <form action="{{ url_for('.create_course') }}" method="post" name="course_name">
+       <h1>Create course</h1>
+       <p>Please fill this form to create a course.</p>
+       <hr>
+
+       <label for="course_id"><b>Course ID</b></label>
+       <input type="text" placeholder="CS2XX" name="course_id" id="course_id" required>
+
+       <label for="section_id"><b>Section ID</b></label>
+       <input type="text" placeholder="CGXX" name="section_id" id="section_id" required>
+
+       <label for="course"><b>Course Type</b></label>
+       <select id="course" name="type">
+         <option>Theory</option>
+         <option>Lab</option>
+         <option>Tutorial</option>
+       </select>
+       <hr>
+
+       <center> <input class="btn btn-primary" type="submit" value="Create Course">
+       </center>
+    </form>
    </div>
       </div>
       <center>
       {% with messages = get_flashed_messages() %}
                {% if messages %}
                       {% for message in messages %}
-                          <b><p style="color:green;">{{ message }}</p></b>
+                          <b><p style="color:red;">{{ message }}</p></b>
                       {% endfor %}
                 {% endif %}
       {% endwith %}

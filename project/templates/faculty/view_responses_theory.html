@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Simple Sidebar - Start Bootstrap Template</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href= "{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{{ url_for('static',filename='css/simple-sidebar.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.min.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}"/>
+
+  <style type="text/css">
+  /* avoid stupid IE6 bug with frames and scrollbars */
+  #more{
+    cursor: pointer;
+  }
+  .grid-x {
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+}
+  td {
+      padding-top: .3em;
+      padding-bottom: .3em;
+  }
+  </style>
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading">Hello {{ faculty.name }}</div>
+      <div class="list-group list-group-flush">
+        <a href="{{ url_for('.faculty_dashboard') }}" class="list-group-item list-group-item-action bg-light">Home</a>
+        <a href="{{ url_for('faculty.logout') }}" class="list-group-item list-group-item-action bg-light">Log Out</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+
+      </nav>
+
+      <div class="container-fluid">
+
+        <div class="grid-x">
+       <table class="stack hover sortable" id="courseTable">
+           <thead>
+               <tr>
+                   <th>Parameters</th>
+                   <th>Average Rating</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr>
+                   <td>A detailed course syllabus was provided at the beginning of the course.</td>
+                   <td>{{ dict['p1'] }}</td>
+               </tr>
+               <tr>
+                   <td>Text books were appropriate for the course.</td>
+                   <td>{{ dict['p2'] }}</td>
+               </tr>
+               <tr>
+                   <td>Reference books provided good support for the course.</td>
+                   <td>{{ dict['p3'] }}</td>
+               </tr>
+               <tr>
+                   <td>The course load was very heavy.</td>
+                   <td>{{ dict['p4'] }}</td>
+               </tr>
+               <tr>
+                   <td>The course was highly enjoyable.</td>
+                   <td>{{ dict['p5'] }}</td>
+               </tr>
+               <tr>
+                   <td>Overall, the instructor was excellent.</td>
+                   <td>{{ dict['p6'] }}</td>
+               </tr>
+               <tr>
+                   <td>The instructor was well prepared for the class.</td>
+                   <td>{{ dict['p7'] }}</td>
+               </tr>
+               <tr>
+                   <td>The concepts were explained properly.</td>
+                   <td>{{ dict['p8'] }}</td>
+               </tr>
+               <tr>
+                   <td>Classes were held regularly as per time-table.</td>
+                   <td>{{ dict['p9'] }}</td>
+               </tr>
+               <tr>
+                   <td>The instructor’s voice was audible and understandable. </td>
+                   <td>{{ dict['p10'] }}</td>
+               </tr>
+               <tr>
+                   <td>Black-board work/visual presentations were of good quality.</td>
+                   <td>{{ dict['p11'] }}</td>
+               </tr>
+               <tr>
+                   <td>Topics were covered in a logical sequence.</td>
+                   <td>{{ dict['p12'] }}</td>
+               </tr>
+               <tr>
+                   <td>The coverage of the course was complete.</td>
+                   <td>{{ dict['p13'] }}</td>
+               </tr>
+               <tr>
+                   <td>Questions and discussions were encouraged.</td>
+                   <td>{{ dict['p14'] }}</td>
+               </tr>
+               <tr>
+                   <td>Evaluation was done regularly &amp; academic advices were given.</td>
+                   <td>{{ dict['p15'] }}</td>
+               </tr>
+           </tbody>
+       </table>
+   </div>
+      </div>
+      {% if remarks|length > 0 %}
+            <div class="grid-x" >
+           <table class="stack hover sortable" id="remarkTable">
+               <thead>
+                   <tr>
+                       <th>Remarks</th>
+                   </tr>
+               </thead>
+               <tbody>
+               {% for remark in remarks %}
+                   <tr>
+                       <td>{{ remark[0] }}</td>
+                   </tr>
+               {% endfor %}
+               </tbody>
+           </table>
+       </div>
+      {% endif %}
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
+</html>

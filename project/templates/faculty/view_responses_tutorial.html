@@ -4,11 +4,11 @@
 <head>
 
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Faculty | Dashboard</title>
+  <title>Faculty Dashboard</title>
 
   <!-- Bootstrap core CSS -->
   <link href= "{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -46,7 +46,6 @@
       <div class="sidebar-heading">Hello {{ faculty.name }}</div>
       <div class="list-group list-group-flush">
         <a href="{{ url_for('.faculty_dashboard') }}" class="list-group-item list-group-item-action bg-light">Home</a>
-        <a href="{{ url_for('.create_course') }}" class="list-group-item list-group-item-action bg-light">Create course</a>
         <a href="{{ url_for('faculty.logout') }}" class="list-group-item list-group-item-action bg-light">Log Out</a>
       </div>
     </div>
@@ -58,6 +57,10 @@
       <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
       </nav>
 
       <div class="container-fluid">
@@ -66,32 +69,65 @@
        <table class="stack hover sortable" id="courseTable">
            <thead>
                <tr>
-                   <th>Course ID</th>
-                   <th>Course Name</th>
-                   <th>Feedback</th>
+                   <th>Parameters</th>
+                   <th>Average rating</th>
                </tr>
            </thead>
            <tbody>
-           {% for course in faculty.courses %}
                <tr>
-                   <td onclick="myFunction(event)" id="#more">{{ course.course_id }}</td>
-                   <td>{{ course_names.query.filter(course.course_id == course_names.id).first().name}}</td>
-                   <td><a href="{{ url_for('.view_responses', id = course.id)}}">View Response</a></td>
+                   <td>Tutorial sheet was provided prior to the tutorial session.</td>
+                   <td>{{dict['p1']}}</td>
                </tr>
-           {% endfor %}
+               <tr>
+                   <td>The Tutorial sheets were useful and followed the lectures.</td>
+                   <td>{{dict['p2']}}</td>
+               </tr>
+               <tr>
+                   <td>The Tutorial sessions were highly enjoyable.</td>
+                   <td>{{dict['p3']}}</td>
+               </tr>
+               <tr>
+                   <td>The tutorial sheets were very difficult.</td>
+                   <td>{{dict['p4']}}</td>
+               </tr>
+               <tr>
+                   <td>The tutorial session helped in clarifiying basic concepts taught in the lectures.</td>
+                   <td>{{dict['p5']}}</td>
+               </tr>
+               <tr>
+                   <td>Overall, the Tutor was excellent.</td>
+                   <td>{{dict['p6']}}</td>
+               </tr>
+               <tr>
+                   <td>The Tutor was well prepared for the class.</td>
+                   <td>{{dict['p7']}}</td>
+               </tr>
+               <tr>
+                   <td>The Tutor’s instructions were clear and understandable.</td>
+                   <td>{{dict['p8']}}</td>
+               </tr>
            </tbody>
        </table>
    </div>
       </div>
-      <center>
-      {% with messages = get_flashed_messages() %}
-               {% if messages %}
-                      {% for message in messages %}
-                          <b><p style="color:green;">{{ message }}</p></b>
-                      {% endfor %}
-                {% endif %}
-      {% endwith %}
-      </center>
+      {% if remarks|length > 0 %}
+            <div class="grid-x" >
+           <table class="stack hover sortable" id="remarkTable">
+               <thead>
+                   <tr>
+                       <th>Remarks</th>
+                   </tr>
+               </thead>
+               <tbody>
+               {% for remark in remarks %}
+                   <tr>
+                       <td>{{ remark[0] }}</td>
+                   </tr>
+               {% endfor %}
+               </tbody>
+           </table>
+       </div>
+      {% endif %}
     </div>
     <!-- /#page-content-wrapper -->
 

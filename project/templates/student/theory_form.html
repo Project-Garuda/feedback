@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/vendor.css') }}"/>
+      <style type="text/css">
+      /* avoid stupid IE6 bug with frames and scrollbars */
+      .grid-x {
+      padding: 30px;
+    }
+      </style>
+  </head>
+  <body>
+    <form action="{{ url_for('.submit_feedback', id = upload_courses_id) }}"
+      target="_self"
+      id="bootstrapForm"
+      class= "grid-x"
+      method="POST">
+    <fieldset>
+        <h2>{{ course_id }} - {{ course_name }} (Theory) - {{ faculty_name }} <br><small>Detailed comments are welcome.
+</small></h2>
+    </fieldset>
+
+    <fieldset>
+        <legend for="1062032157">About the course</legend>
+        <div class="form-group">
+        </div>
+    </fieldset>
+
+    <!-- Field type: "linear" id: "496373246" -->
+    <fieldset>
+        <legend for="496373246">A detailed course syllabus was provided at the beginning of the course.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p1" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p1" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p1" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p1" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p1" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1460703102" -->
+    <fieldset>
+        <legend for="1460703102">Text books were appropriate for the course.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p2" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p2" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p2" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p2" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p2" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1809602327" -->
+    <fieldset>
+        <legend for="1809602327">Reference books provided good support for the course.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p3" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p3" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p3" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p3" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p3" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1368524353" -->
+    <fieldset>
+        <legend for="1368524353">The course load was very heavy.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p4" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p4" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p4" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p4" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p4" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1338862263" -->
+    <fieldset>
+        <legend for="1338862263">The course was highly enjoyable.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p5" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p5" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p5" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p5" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p5" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "section" id: "1928759629" -->
+    <fieldset>
+        <legend for="1928759629">About the teaching</legend>
+        <div class="form-group">
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1426950992" -->
+    <fieldset>
+        <legend for="1426950992">Overall, the instructor was excellent.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p6" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p6" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p6" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p6" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p6" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "715238538" -->
+    <fieldset>
+        <legend for="715238538">The instructor was well prepared for the class.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p7" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p7" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p7" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p7" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p7" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1793708049" -->
+    <fieldset>
+        <legend for="1793708049">The concepts were explained properly.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p8" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p8" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p8" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p8" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p8" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1718529808" -->
+    <fieldset>
+        <legend for="1718529808">Classes were held regularly as per time-table.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p9" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p9" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p9" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p9" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p9" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "272847404" -->
+    <fieldset>
+        <legend for="272847404">The instructor’s voice was audible and understandable. </legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p10" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p10" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p10" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p10" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p10" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "255503805" -->
+    <fieldset>
+        <legend for="255503805">Black-board work/visual presentations were of good quality.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p11" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p11" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p11" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p11" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p11" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "635860419" -->
+    <fieldset>
+        <legend for="635860419">Topics were covered in a logical sequence.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p12" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p12" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p12" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p12" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p12" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1647813593" -->
+    <fieldset>
+        <legend for="1647813593">The coverage of the course was complete.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p13" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p13" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p13" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p13" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p13" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1120908731" -->
+    <fieldset>
+        <legend for="1120908731">Questions and discussions were encouraged.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p14" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p14" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p14" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p14" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p14" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "linear" id: "1764936493" -->
+    <fieldset>
+        <legend for="1764936493">Evaluation was done regularly &amp; academic advices were given.</legend>
+        <div class="form-group">
+            <div>
+            <label class="radio-inline">
+                <input type="radio" name="p15" value="1" required>
+                1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p15" value="2" >
+                2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p15" value="3" >
+                3
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p15" value="4" >
+                4
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="p15" value="5" >
+                5
+            </label>
+            </div>
+            <div>
+                <div>1: Strongly disagree</div>
+                <div>5: Strongly agree</div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <!-- Field type: "paragraph" id: "592303986" -->
+    <fieldset>
+        <legend for="592303986">Mention strong and weak points of the course / instructions. Any other detailed comments are welcome.Also mention suggestions, if any, to improve the course and its teaching methodology so that the course will be more useful and enjoyable. </legend>
+        <div class="form-group">
+            <textarea id="849562661" name="remark" class="form-control" ></textarea>
+        </div>
+    </fieldset>
+
+    <!--
+        CAVEAT: In multipages (multisection) forms, *pageHistory* field tells to google what sections we've currently completed.
+        This usually starts as "0" for the first page, then "0,1" in the second page... up to "0,1,2..N" in n-th page.
+        Keep this in mind if you plan to change this code to recreate any sort of multipage-feature in your exported form.
+        We're setting this to the total number of pages in this form because we're sending all fields from all the section together.
+    -->
+
+    <input class="btn btn-primary" type="submit" value="Submit">
+</form>
+  </body>
+</html>

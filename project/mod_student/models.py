@@ -13,6 +13,7 @@ class Student(Base):
     name =  Column(String(50))
     section = relationship('UploadSection', backref = 'upload_section')
     password = Column(String(255), nullable=False)
+    filled = relationship('Filled', backref='filled')
 
     def __init__(self, id, name, password):
         self.id = id
