@@ -1,13 +1,12 @@
 from project.mod_faculty.models import Faculty,Courses , Feedback, Theory, Lab, Tutorial, UploadCourses, Admin
 from project.mod_student.models import Student, UploadSection, Section
 from project import db_session, bcrypt, app, Base, create_engine_models, delete_engine_models
-from flask import Flask, render_template, request, redirect, url_for, Blueprint, session , abort, flash
+from flask import Flask, render_template, request, redirect, url_for, Blueprint, session , abort, flash, g
 from werkzeug.utils import secure_filename
 import os
 import openpyxl as op
 
 mod_admin = Blueprint('admin', __name__)
-
 @mod_admin.route("/dashboard" ,methods=['GET', 'POST'])
 def admin_dashboard():
     if 'admin' in session:
@@ -17,6 +16,7 @@ def admin_dashboard():
         return render_template('admin/admin_dashboard.html',
         admin = admin,
         session = session,
+        status = app.config['feedback_status'],
         upload_courses = upload_courses,
         faculty = Faculty,
         course_names = Courses
@@ -191,3 +191,66 @@ def process_data(file_names):
         return redirect(url_for('.admin_upload'))
 
     return 1
+
+@mod_admin.route('/add', methods=['GET', 'POST'])
+def add_user():
+    if 'admin' in session:
+        admin = Admin.query.filter(Admin.id == session['admin']).first()
+        if request.method == "POST":
+            print('Hello')
+            id = int(request.form['id'])
+            name = request.form['name']
+            role = request.form['role']
+            password = bcrypt.generate_password_hash(str(id)).decode('utf-8')
+            if role == "Faculty":
+                db_session.add(Faculty(id, name, password))
+            if role == "Student":
+                db_session.add(Student(id, name, password))
+            try:
+                db_session.commit()
+                flash('Success')
+                return redirect(url_for('.admin_dashboard'))
+            except Exception as e:
+                flash('Error! User already exists')
+                return redirect(url_for('.add_user'))
+        return render_template('admin/add_user.html',
+        admin = admin,
+        session = session,
+        )
+    else:
+        return redirect(url_for('admin_home'))
+
+@mod_admin.route('/change',methods=['GET', 'POST'])
+def change_password():
+    if 'admin' in session:
+        admin = Admin.query.filter(Admin.id == session['admin']).first()
+        if request.method == "POST":
+            if bcrypt.check_password_hash(admin.password, request.form['old_pass']):
+                new_pass = bcrypt.generate_password_hash(request.form['new_pass']).decode('utf-8')
+                update_admin = Admin.query.filter(Admin.id == session['admin']).update({'password': new_pass})
+                try:
+                    db_session.commit()
+                    flash('Successfully Updated Password')
+                    return redirect(url_for('.admin_dashboard'))
+                except Exception as e:
+                    print(e)
+                    flash('Unknown error!')
+                    return redirect(url_for('.change_password'))
+            else:
+                flash('Old Password is incorrect')
+                return redirect(url_for('.change_password'))
+        return render_template('admin/change_password.html',
+        admin = admin,
+        session = session,
+        )
+    else:
+        return redirect(url_for('admin_home'))
+
+@mod_admin.route('/toggle', methods=['GET', 'POST'])
+def toggle_feedback():
+    if 'admin' in session:
+        app.config['feedback_status'] = 1-app.config['feedback_status']
+        admin = Admin.query.filter(Admin.id == session['admin']).first()
+        return redirect(url_for('.admin_dashboard'))
+    else:
+        return redirect(url_for('admin_home'))

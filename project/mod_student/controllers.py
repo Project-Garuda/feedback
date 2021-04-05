@@ -1,6 +1,6 @@
 from project.mod_student.models import Student
 from project.mod_faculty.models import UploadCourses, Courses, Faculty, Filled, Theory, Feedback, Lab, Tutorial
-from project import db_session, bcrypt
+from project import db_session, bcrypt, app
 from sqlalchemy import and_, func
 from flask import Flask, render_template, request, redirect, url_for, Blueprint, session, abort, jsonify, flash
 from sqlalchemy.orm import load_only
@@ -9,6 +9,9 @@ mod_student = Blueprint('student', __name__)
 
 @mod_student.route("/" ,methods=['GET', 'POST'])
 def student_dashboard():
+    if app.config['feedback_status'] == 0:
+        flash('Currently system is not accepting any feedbacks.')
+        logout()
     if 'student' in session:
         student = Student.query.filter(Student.id == session['student']).first()
         print(student)
@@ -126,5 +129,31 @@ def submit_feedback(id):
                     course_name = course_name[0],
                     faculty_name = faculty_name[0]
                  )
+    else:
+        return redirect(url_for('home'))
+
+@mod_student.route('/change',methods=['GET', 'POST'])
+def change_password():
+    if 'student' in session:
+        student = Student.query.filter(Student.id == session['student']).first()
+        if request.method == "POST":
+            if bcrypt.check_password_hash(student.password, request.form['old_pass']):
+                new_pass = bcrypt.generate_password_hash(request.form['new_pass']).decode('utf-8')
+                update_student = Student.query.filter(Student.id == session['student']).update({'password': new_pass})
+                try:
+                    db_session.commit()
+                    flash('Successfully Updated Password')
+                    return redirect(url_for('.student_dashboard'))
+                except Exception as e:
+                    print(e)
+                    flash('Unknown error!')
+                    return redirect(url_for('.change_password'))
+            else:
+                flash('Old Password is incorrect')
+                return redirect(url_for('.change_password'))
+        return render_template('student/change_password.html',
+        student = student,
+        session = session,
+        )
     else:
         return redirect(url_for('home'))

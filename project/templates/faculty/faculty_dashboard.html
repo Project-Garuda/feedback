@@ -47,6 +47,8 @@
       <div class="list-group list-group-flush">
         <a href="{{ url_for('.faculty_dashboard') }}" class="list-group-item list-group-item-action bg-light">Home</a>
         <a href="{{ url_for('.create_course') }}" class="list-group-item list-group-item-action bg-light">Create course</a>
+        <a href="{{ url_for('.delete_course') }}" class="list-group-item list-group-item-action bg-light">Delete course</a>
+        <a href="{{ url_for('.change_password') }}" class="list-group-item list-group-item-action bg-light">Change Password</a>
         <a href="{{ url_for('faculty.logout') }}" class="list-group-item list-group-item-action bg-light">Log Out</a>
       </div>
     </div>
@@ -63,6 +65,7 @@
       <div class="container-fluid">
 
         <div class="grid-x">
+          {% if faculty.courses|length > 0%}
        <table class="stack hover sortable" id="courseTable">
            <thead>
                <tr>
@@ -81,6 +84,9 @@
            {% endfor %}
            </tbody>
        </table>
+       {% else %}
+       <center><h5>No courses to display. To create course head over to Create Course page.</h5></center>
+       {% endif %}
    </div>
       </div>
       <center>

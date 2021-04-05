@@ -34,6 +34,9 @@
       padding-top: .3em;
       padding-bottom: .3em;
   }
+  .toggle-feedback{
+    margin-left: 3px;
+  }
   </style>
 </head>
 
@@ -47,7 +50,14 @@
       <div class="list-group list-group-flush">
         <a href="{{ url_for('.admin_dashboard') }}" class="list-group-item list-group-item-action bg-light">Home</a>
         <a href="{{ url_for('.admin_upload') }}" class="list-group-item list-group-item-action bg-light">Upload Data</a>
+        <a href="{{ url_for('.add_user') }}" class="list-group-item list-group-item-action bg-light">Add User</a>
+        <a href="{{ url_for('.change_password') }}" class="list-group-item list-group-item-action bg-light">Change Password</a>
         <a href="{{ url_for('.logout') }}" class="list-group-item list-group-item-action bg-light">Log Out</a>
+        {% if status == 1%}
+        <p class="list-group-item list-group-item-action bg-light"><b>Current Feedback status: <span style="color:green;">On</span></b></p>
+        {% else%}
+        <p class="list-group-item list-group-item-action bg-light"><b>Current Feedback status: <span style="color:red;">Off</span></b></p>
+        {% endif %}
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -57,11 +67,10 @@
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
-
+        <a href="{{ url_for('.toggle_feedback') }}" class="btn btn-primary toggle-feedback" id="menu-toggle">Toggle Feedback</a>
       </nav>
 
       <div class="container-fluid">
-
         <div class="grid-x">
           {% if upload_courses|length >0 %}
        <table class="stack hover sortable" id="courseTable">
@@ -79,13 +88,13 @@
                    <td>{{ course.course_id }}</td>
                    <td>{{ course_names.query.filter(course.course_id == course_names.id).first().name}}</td>
                    <td>{{ faculty.query.filter(course.faculty_id == faculty.id).first().name}}</td>
-                   <td><a href="{{ url_for('.view_responses', id = course.id)}}">View Response</a></td>
+                   <td><a href="{{ url_for('.view_responses', id = course.id)}}">View Responses</a></td>
                </tr>
            {% endfor %}
            </tbody>
        </table>
        {% else %}
-       <center><p> No courses to display </p></center>
+       <center><h5> No courses to display </h5></center>
        {% endif %}
    </div>
       </div>

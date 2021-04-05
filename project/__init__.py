@@ -7,6 +7,7 @@ app = Flask(__name__, static_url_path='/static')
 app.secret_key = 'Helloworld'
 UPLOAD_FOLDER = '/home/shravan/SE/project/static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['feedback_status'] = 0
 bcrypt = Bcrypt(app)
 
 from sqlalchemy.ext.declarative import declarative_base
@@ -53,6 +54,9 @@ def home():
     if request.method == "POST":
         user_id = request.form['login_username']
         if request.form['role'] == 'student':
+            if app.config['feedback_status'] == 0:
+                flash('Currently system is not accepting any feedbacks.')
+                return redirect(url_for('home'))
             student = Student.query.filter(Student.id == user_id).first()
             if student and bcrypt.check_password_hash(student.password, request.form['secretkey']):
                 session['student'] = user_id

@@ -123,3 +123,59 @@ def view_responses(id):
             )
     else:
         return redirect(url_for('home'))
+
+@mod_faculty.route('/change',methods=['GET', 'POST'])
+def change_password():
+    if 'faculty' in session:
+        faculty = Faculty.query.filter(Faculty.id == session['faculty']).first()
+        if request.method == "POST":
+            if bcrypt.check_password_hash(faculty.password, request.form['old_pass']):
+                new_pass = bcrypt.generate_password_hash(request.form['new_pass']).decode('utf-8')
+                update_faculty = Faculty.query.filter(Faculty.id == session['faculty']).update({'password': new_pass})
+                try:
+                    db_session.commit()
+                    flash('Successfully Updated Password')
+                    return redirect(url_for('.faculty_dashboard'))
+                except Exception as e:
+                    print(e)
+                    flash('Unknown error!')
+                    return redirect(url_for('.change_password'))
+            else:
+                flash('Old Password is incorrect')
+                return redirect(url_for('.change_password'))
+        return render_template('faculty/change_password.html',
+        faculty = faculty,
+        session = session,
+        )
+    else:
+        return redirect(url_for('home'))
+
+@mod_faculty.route('/delete',methods=['GET', 'POST'])
+def delete_course():
+    if 'faculty' in session:
+        faculty = Faculty.query.filter(Faculty.id == session['faculty']).first()
+        return render_template('faculty/delete_course.html',
+        faculty = faculty,
+        session = session,
+        course_names = Courses,
+        )
+    else:
+        return redirect(url_for('home'))
+
+@mod_faculty.route('/delete/<int:id>',methods=['GET','POST'])
+def delete_course_id(id):
+    if 'faculty' in session:
+        faculty = Faculty.query.filter(Faculty.id == session['faculty']).first()
+        my_obj = UploadCourses.query.filter(UploadCourses.id == id).first()
+        if my_obj is None:
+            abort(404)
+        db_session.delete(my_obj)
+        try:
+            db_session.commit()
+            flash('Course deleted Successfully')
+            return redirect(url_for('.faculty_dashboard'))
+        except Exception as e:
+            flash('Error in deleting the course!')
+            return redirect(url_for('.delete_course'))
+    else:
+        return redirect(url_for('home'))
