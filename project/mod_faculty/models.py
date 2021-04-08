@@ -79,7 +79,7 @@ class Filled(Base):
 class Theory(Base):
     __tablename__ = 'theory'
     id = Column(Integer, ForeignKey('upload_courses.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
-    no_respones = Column(Integer, default = 0)
+    no_responses = Column(Integer, default = 0)
     p1 = Column(Float, default = 5)
     p2 = Column(Float, default = 5)
     p3 = Column(Float, default = 5)
@@ -121,7 +121,7 @@ class Theory(Base):
 class Lab(Base):
     __tablename__ = 'lab'
     id = Column(Integer, ForeignKey('upload_courses.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
-    no_respones = Column(Integer, default = 0)
+    no_responses = Column(Integer, default = 0)
     p1 = Column(Float, default = 5)
     p2 = Column(Float, default = 5)
     p3 = Column(Float, default = 5)
@@ -153,7 +153,7 @@ class Lab(Base):
 class Tutorial(Base):
     __tablename__ = 'tutorial'
     id = Column(Integer, ForeignKey('upload_courses.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
-    no_respones = Column(Integer, default = 0)
+    no_responses = Column(Integer, default = 0)
     p1 = Column(Float, default = 5)
     p2 = Column(Float, default = 5)
     p3 = Column(Float, default = 5)

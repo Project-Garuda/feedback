@@ -3,7 +3,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy import and_, func
 from flask_bcrypt import Bcrypt
 
-app = Flask(__name__, static_url_path='/static')
+app = Flask(__name__, static_url_path='/static', template_folder='templates')
 app.secret_key = 'Helloworld'
 UPLOAD_FOLDER = '/home/shravan/SE/project/static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -14,9 +14,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 
 Base = declarative_base()
-DATABASE_URI = 'mysql+pymysql://shravan:kvshravan1@@localhost:3306/college'
+DATABASE_URI = 'sqlite:///:memory:' #This is for testing
+#DATABASE_URI = 'mysql+pymysql://shravan:kvshravan1@@localhost:3306/college'
 try:
-    engine = create_engine(DATABASE_URI,echo = True)
+    engine = create_engine(DATABASE_URI, echo = False)
 except Exception as e:
     print(e)
 db_session = scoped_session(sessionmaker(bind=engine))

@@ -22,6 +22,7 @@ def faculty_dashboard():
 def logout():
     if 'faculty' in session:
         session.pop('faculty', None)
+        flash('You have been logged out')
         return redirect(url_for('home'))
     return redirect(url_for('home'))
 
@@ -30,14 +31,12 @@ def create_course():
     if 'faculty' in session:
         faculty = Faculty.query.filter(Faculty.id == session['faculty']).first()
         if request.method == "POST":
-            print('Hello')
             course_id = request.form['course_id'].upper()
             section_id = request.form['section_id'].upper()
             dict = {'Theory':0, 'Lab':1, 'Tutorial':2}
             type = dict[request.form['type']]
             course = Courses.query.filter(Courses.id == course_id).first()
             section = Courses.query.filter(Section.id == section_id).first()
-            print(type)
             if course is None:
                 flash('Invalid Course ID')
                 return redirect(url_for('.create_course'))
@@ -75,20 +74,24 @@ def create_course():
         faculty = faculty,
         session = session,
         )
+    else:
+        return redirect(url_for('home'))
+
 
 @mod_faculty.route('/view/<int:id>', methods=['GET'])
 def view_responses(id):
     if 'faculty' in session:
         faculty = Faculty.query.filter(Faculty.id == session['faculty']).first()
         my_obj = UploadCourses.query.filter(UploadCourses.id == id).first()
+        if my_obj is None:
+            abort(404)
         if my_obj.course == 0:
             theory = Theory.query.filter(Theory.id == id).first()
             if theory is None:
                 abort(404)
             theory_dict = theory.fetch_dict()
-            theory_dict['no_respones'] = theory.no_respones
+            theory_dict['no_responses'] = theory.no_responses
             remarks = Feedback.query.with_entities(Feedback.remark).filter(my_obj.id == Feedback.upload_courses_id).all()
-            print(remarks)
             return render_template('faculty/view_responses_theory.html',
             faculty = faculty,
             dict = theory_dict,
@@ -96,13 +99,11 @@ def view_responses(id):
             )
         elif my_obj.course == 1:
             lab = Lab.query.filter(Lab.id == id).first()
-            print(lab)
             if lab is None:
                 abort(404)
             lab_dict = lab.fetch_dict()
-            lab_dict['no_respones'] = lab.no_respones
+            lab_dict['no_responses'] = lab.no_responses
             remarks = Feedback.query.with_entities(Feedback.remark).filter(my_obj.id == Feedback.upload_courses_id).all()
-            print(remarks)
             return render_template('faculty/view_responses_lab.html',
             faculty = faculty,
             dict = lab_dict,
@@ -113,9 +114,8 @@ def view_responses(id):
             if tutorial is None:
                 abort(404)
             tutorial_dict = tutorial.fetch_dict()
-            tutorial_dict['no_respones'] = tutorial.no_respones
+            tutorial_dict['no_responses'] = tutorial.no_responses
             remarks = Feedback.query.with_entities(Feedback.remark).filter(my_obj.id == Feedback.upload_courses_id).all()
-            print(remarks)
             return render_template('faculty/view_responses_tutorial.html',
             faculty = faculty,
             dict = tutorial_dict,

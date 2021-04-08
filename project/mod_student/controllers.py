@@ -32,6 +32,7 @@ def student_dashboard():
 def logout():
     if 'student' in session:
         session.pop('student', None)
+        flash('You have been logged out')
         return redirect(url_for('home'))
     return redirect(url_for('home'))
 
@@ -48,9 +49,9 @@ def submit_feedback(id):
                     abort(404)
                 theory_dict = theory.fetch_dict()
                 for elem in theory_dict:
-                    theory_dict[elem] = (theory.no_respones*theory_dict[elem]+int(request.form[elem]))/(theory.no_respones+1)
+                    theory_dict[elem] = (theory.no_responses*theory_dict[elem]+int(request.form[elem]))/(theory.no_responses+1)
                 theory_dict['id'] = id
-                theory_dict['no_respones'] = theory.no_respones+1
+                theory_dict['no_responses'] = theory.no_responses+1
                 update_theory = Theory.query.filter(Theory.id == id).update(theory_dict)
             elif my_obj.course == 1:
                 lab = Lab.query.filter(Lab.id == id).first()
@@ -58,9 +59,9 @@ def submit_feedback(id):
                     abort(404)
                 lab_dict = lab.fetch_dict()
                 for elem in lab_dict:
-                    lab_dict[elem] = (lab.no_respones*lab_dict[elem]+int(request.form[elem]))/(lab.no_respones+1)
+                    lab_dict[elem] = (lab.no_responses*lab_dict[elem]+int(request.form[elem]))/(lab.no_responses+1)
                 lab_dict['id'] = id
-                lab_dict['no_respones'] = lab.no_respones+1
+                lab_dict['no_responses'] = lab.no_responses+1
                 update_lab = Lab.query.filter(Lab.id == id).update(lab_dict)
             else:
                 tutorial = Tutorial.query.filter(Tutorial.id == id).first()
@@ -68,9 +69,9 @@ def submit_feedback(id):
                     abort(404)
                 tutorial_dict = tutorial.fetch_dict()
                 for elem in tutorial_dict:
-                    tutorial_dict[elem] = (tutorial.no_respones*tutorial_dict[elem]+int(request.form[elem]))/(tutorial.no_respones+1)
+                    tutorial_dict[elem] = (tutorial.no_responses*tutorial_dict[elem]+int(request.form[elem]))/(tutorial.no_responses+1)
                 tutorial_dict['id'] = id
-                tutorial_dict['no_respones'] = tutorial.no_respones+1
+                tutorial_dict['no_responses'] = tutorial.no_responses+1
                 update_tutorial = Tutorial.query.filter(Tutorial.id == id).update(tutorial_dict)
 
             filled = Filled(session['student'], id)

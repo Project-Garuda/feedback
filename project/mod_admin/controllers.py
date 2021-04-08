@@ -34,7 +34,7 @@ def view_responses(id):
             if theory is None:
                 abort(404)
             theory_dict = theory.fetch_dict()
-            theory_dict['no_respones'] = theory.no_respones
+            theory_dict['no_responses'] = theory.no_responses
             remarks = Feedback.query.with_entities(Feedback.remark).filter(my_obj.id == Feedback.upload_courses_id).all()
             print(remarks)
             return render_template('admin/view_responses_theory.html',
@@ -48,7 +48,7 @@ def view_responses(id):
             if lab is None:
                 abort(404)
             lab_dict = lab.fetch_dict()
-            lab_dict['no_respones'] = lab.no_respones
+            lab_dict['no_responses'] = lab.no_responses
             remarks = Feedback.query.with_entities(Feedback.remark).filter(my_obj.id == Feedback.upload_courses_id).all()
             print(remarks)
             return render_template('admin/view_responses_lab.html',
@@ -61,7 +61,7 @@ def view_responses(id):
             if tutorial is None:
                 abort(404)
             tutorial_dict = tutorial.fetch_dict()
-            tutorial_dict['no_respones'] = tutorial.no_respones
+            tutorial_dict['no_responses'] = tutorial.no_responses
             remarks = Feedback.query.with_entities(Feedback.remark).filter(my_obj.id == Feedback.upload_courses_id).all()
             print(remarks)
             return render_template('admin/view_responses_tutorial.html',
@@ -76,6 +76,7 @@ def view_responses(id):
 def logout():
     if 'admin' in session:
         session.pop('admin', None)
+        flash('You have been logged out')
         return redirect(url_for('admin_home'))
     return redirect(url_for('admin_home'))
 
