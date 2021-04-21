@@ -1,5 +1,5 @@
 # Faculty Feedback Management System
-It is a feedback system where students give their feedback on their corresponding faculties over a semester. These reviews are retrieved and average calculations are performed.These ratings adn reviews are displayed to admin authorities to investigate the faculty performance, which will, in turn, helps them to smoothen the teaching-learning process.Student anonymity will be maintained.
+It is a feedback system where students give their feedback on their corresponding faculties over a semester. These reviews are retrieved and average calculations are performed.These ratings and reviews are displayed to admin authorities to investigate the faculty performance, which will, in turn, helps them to smoothen the teaching-learning process.Student anonymity will be maintained.
 
 ## Installation
 ### Fetch requirements
