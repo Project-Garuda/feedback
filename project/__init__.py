@@ -5,7 +5,7 @@ from flask_bcrypt import Bcrypt
 
 app = Flask(__name__, static_url_path='/static', template_folder='templates')
 app.secret_key = 'Helloworld'
-UPLOAD_FOLDER = '/home/shravan/software/project/static/uploads'
+UPLOAD_FOLDER = '/home/shravan/software/project/static/uploads' #folder for storing Uploaded files
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['feedback_status'] = 0
 bcrypt = Bcrypt(app)
@@ -48,6 +48,7 @@ app.register_blueprint(mod_admin, url_prefix='/admin')
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
+    """Wrapper for login system"""
     if 'student' in session:
         return redirect(url_for('.student.student_dashboard'))
     if 'faculty' in session:
@@ -76,6 +77,7 @@ def home():
 
 @app.route("/admin", methods=['GET', 'POST'])
 def admin_home():
+    """Wrapper for admin login system"""
     if 'admin' in session:
         return redirect(url_for('.admin.admin_dashboard'))
     if request.method == "POST":
