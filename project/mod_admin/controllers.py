@@ -208,7 +208,6 @@ def add_user():
             id = int(request.form['id'])
             name = request.form['name']
             role = request.form['role']
-            section = request.form['section']
             password = bcrypt.generate_password_hash(str(id)).decode('utf-8')
             if role == "Faculty":
                 faculty = Faculty.query.filter(id == Faculty.id).first()
@@ -217,6 +216,7 @@ def add_user():
                     return redirect(url_for('.add_user'))
                 db_session.add(Faculty(id, name, password))
             if role == "Student":
+                section = request.form['section']
                 student = Student.query.filter(id == Student.id).first()
                 if student is not None:
                     flash('Error! User already exists')

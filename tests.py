@@ -228,5 +228,11 @@ class TestInvalidAccess(BaseTestCase):
             response = c.get('/student/change',  follow_redirects = True)
             self.assert_template_used('index.html')
 
+class TestStudentControllers(BaseTestCase):
+    def test_submit_feedback(self):
+        with self.app.test_client() as c:
+            response = c.post('/', data=dict(login_username = '1801082', secretkey= '1801082', role = 'student'),follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+
 if __name__ == '__main__':
     unittest.main()
