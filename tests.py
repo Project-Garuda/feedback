@@ -171,6 +171,36 @@ class TestFacultyControllers(BaseTestCase):
             self.assertEqual(response.status_code, 200)
             self.assert_template_used('faculty/view_responses_tutorial.html')
 
+    def test_delete_course(self):
+        with self.app.test_client() as c:
+            response = c.post('/', data=dict(login_username = '2801083', secretkey= '2801083', role = 'faculty'))
+            self.assertEqual(response.status_code, 302)
+            response = c.get('/faculty/delete/4', follow_redirects = True)
+            self.assert_template_used('faculty/faculty_dashboard.html')
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b"Course deleted Successfully", response.data)
+
+    def test_change_password_faculty(self):
+       with self.app.test_client() as c:
+           response = c.post('/', data=dict(login_username = '2801083', secretkey= '2801083', role = 'faculty'),follow_redirects=True)
+           self.assertEqual(response.status_code, 200)
+           response = c.post('/faculty/change', data=dict(old_pass = '2801083', new_pass = '2801084'),follow_redirects=True)
+           self.assertEqual(response.status_code, 200)
+           self.assertIn(b"Successfully Updated Password",response.data)
+           response = c.get(url_for('faculty.logout'), follow_redirects=True)
+           self.assertEqual(response.status_code, 200)
+           self.assertIn(b"You have been logged out", response.data)
+           response = c.post('/', data=dict(login_username = '2801083', secretkey= '2801084', role = 'faculty'))
+           self.assertEqual(response.status_code, 302)
+           self.assertEqual(response.location, url_for('faculty.faculty_dashboard', _external=True))
+           response = c.post('/faculty/change', data=dict(old_pass = '2801084', new_pass = '2801083'))
+           self.assertEqual(response.status_code, 302)
+           self.assertEqual(response.location, url_for('faculty.faculty_dashboard', _external=True))
+           response = c.get(url_for('faculty.logout'), follow_redirects=True)
+           self.assertEqual(response.status_code, 200)
+           self.assertIn(b"You have been logged out", response.data)
+
+
 class TestInvalidAccess(BaseTestCase):
     def test_invalid_access_faculty(self):
         with self.app.test_client() as c:

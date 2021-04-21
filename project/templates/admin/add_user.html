@@ -63,6 +63,15 @@
       <div class="container-fluid">
 
         <div class="grid-x">
+          <center>
+          {% with messages = get_flashed_messages() %}
+                   {% if messages %}
+                          {% for message in messages %}
+                              <b><p style="color:red;">{{ message }}</p></b>
+                          {% endfor %}
+                    {% endif %}
+          {% endwith %}
+          </center>
           <form action="{{ url_for('.add_user') }}" method="post" name="course_name">
        <h1>Add User</h1>
        <p>Please fill this to create a user.</p>
@@ -73,6 +82,9 @@
 
        <label for="name"><b>Name</b></label>
        <input type="text" placeholder="John" name="name" id="name" required>
+
+       <label for="name"><b>Section ID</b></label>
+       <input type="text" placeholder="Required only for student" name="section" id="section">
 
        <label for="role"><b>Role</b></label>
        <select id="role" name="role">
@@ -86,15 +98,6 @@
     </form>
    </div>
       </div>
-      <center>
-      {% with messages = get_flashed_messages() %}
-               {% if messages %}
-                      {% for message in messages %}
-                          <b><p style="color:red;">{{ message }}</p></b>
-                      {% endfor %}
-                {% endif %}
-      {% endwith %}
-      </center>
     </div>
     <!-- /#page-content-wrapper -->
 

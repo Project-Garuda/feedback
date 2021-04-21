@@ -5,7 +5,7 @@ from flask_bcrypt import Bcrypt
 
 app = Flask(__name__, static_url_path='/static', template_folder='templates')
 app.secret_key = 'Helloworld'
-UPLOAD_FOLDER = '/home/shravan/SE/project/static/uploads'
+UPLOAD_FOLDER = '/home/shravan/software/project/static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['feedback_status'] = 0
 bcrypt = Bcrypt(app)
@@ -14,8 +14,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 
 Base = declarative_base()
-DATABASE_URI = 'sqlite:///:memory:' #This is for testing
-#DATABASE_URI = 'mysql+pymysql://shravan:kvshravan1@@localhost:3306/college'
+#DATABASE_URI = 'sqlite:///:memory:' #This is for testing
+DATABASE_URI = 'mysql+pymysql://shravan:kvshravan1@@localhost:3306/college'
 try:
     engine = create_engine(DATABASE_URI, echo = False)
 except Exception as e:

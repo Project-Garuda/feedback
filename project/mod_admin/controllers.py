@@ -9,6 +9,7 @@ import openpyxl as op
 mod_admin = Blueprint('admin', __name__)
 @mod_admin.route("/dashboard" ,methods=['GET', 'POST'])
 def admin_dashboard():
+    """This is the function which is responsible for displaying content of the admin dashboard"""
     if 'admin' in session:
         admin = Admin.query.filter(Admin.id == session['admin']).first()
         print(admin)
@@ -74,6 +75,7 @@ def view_responses(id):
 
 @mod_admin.route('/logout')
 def logout():
+    """If admin exists in the session admin is logged out and returned to home else just redirect to home"""
     if 'admin' in session:
         session.pop('admin', None)
         flash('You have been logged out')
@@ -82,6 +84,8 @@ def logout():
 
 @mod_admin.route('/upload', methods=['GET', 'POST'])
 def admin_upload():
+    """"The function is responsible for taking the data from admin and updataing the database with new data
+    collected from the admin."""
     if 'admin' in session:
         admin = Admin.query.filter(Admin.id == session['admin']).first()
         if request.method == "POST":
@@ -110,6 +114,7 @@ def admin_upload():
     return redirect(url_for('admin_home'))
 
 def process_data(file_names):
+    """ Core function where all the data processing happens."""
     admin_objs = Admin.query.all()
     try:
         delete_engine_models()
@@ -195,6 +200,7 @@ def process_data(file_names):
 
 @mod_admin.route('/add', methods=['GET', 'POST'])
 def add_user():
+    """Function responsible for Add user feature."""
     if 'admin' in session:
         admin = Admin.query.filter(Admin.id == session['admin']).first()
         if request.method == "POST":
@@ -202,14 +208,28 @@ def add_user():
             id = int(request.form['id'])
             name = request.form['name']
             role = request.form['role']
+            section = request.form['section']
             password = bcrypt.generate_password_hash(str(id)).decode('utf-8')
             if role == "Faculty":
+                faculty = Faculty.query.filter(id == Faculty.id).first()
+                if faculty is not None:
+                    flash('Error! User already exists')
+                    return redirect(url_for('.add_user'))
                 db_session.add(Faculty(id, name, password))
             if role == "Student":
+                student = Student.query.filter(id == Student.id).first()
+                if student is not None:
+                    flash('Error! User already exists')
+                    return redirect(url_for('.add_user'))
+                sec = Section.query.filter(section == Section.id).first()
+                if sec is None:
+                    flash('Invalid Section!')
+                    return redirect(url_for('.add_user'))
                 db_session.add(Student(id, name, password))
+                db_session.add(UploadSection(section, id))
             try:
                 db_session.commit()
-                flash('Success')
+                flash('User created successfully!')
                 return redirect(url_for('.admin_dashboard'))
             except Exception as e:
                 flash('Error! User already exists')
@@ -223,6 +243,7 @@ def add_user():
 
 @mod_admin.route('/change',methods=['GET', 'POST'])
 def change_password():
+    """Function responsible for changing password of admin"""
     if 'admin' in session:
         admin = Admin.query.filter(Admin.id == session['admin']).first()
         if request.method == "POST":
@@ -249,6 +270,7 @@ def change_password():
 
 @mod_admin.route('/toggle', methods=['GET', 'POST'])
 def toggle_feedback():
+    """Function responsible for Changing the status of feedback"""
     if 'admin' in session:
         app.config['feedback_status'] = 1-app.config['feedback_status']
         admin = Admin.query.filter(Admin.id == session['admin']).first()

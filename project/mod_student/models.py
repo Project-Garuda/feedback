@@ -7,7 +7,11 @@ import pymysql
 
 from project import Base
 
+"""Consists of all the Classes related to student"""
+"""All the passwords are hashed and stored in the database using flask bcrypt"""
+
 class Student(Base):
+    """Student Credentials are stored in this class."""
     __tablename__ = 'student'
     id = Column(Integer, primary_key=True)
     name =  Column(String(50))
@@ -21,7 +25,7 @@ class Student(Base):
         self.password = password
 
 class Section(Base):
-    """docstring for Section."""
+    """Class which contais all the section ID's"""
     __tablename__ = 'section'
     id = Column(String(10),primary_key = True)
 
@@ -29,7 +33,7 @@ class Section(Base):
         self.id = id
 
 class UploadSection(Base):
-    """docstring for Section."""
+    """Class which consists of list of students in each section.Each feild has a student id and ID which specifies a student belongs to a particular section"""
     __tablename__ = 'upload_section'
     sno = Column(Integer , primary_key = True)
     id = Column(String(10), ForeignKey('section.id', onupdate='CASCADE', ondelete='CASCADE'))
